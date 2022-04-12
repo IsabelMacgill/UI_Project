@@ -14,6 +14,8 @@
 
 {% endblock %}
 
+// src code: http://blueshirt.com/pooch/examples/interactive-globe.html 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,10 +175,12 @@ return { x: projX, y: projY };
 }
 </script>
 <div class="pooch-button-container">
-<button class="pooch-button" onclick="spinToLocation (2.315, -0.465, 'AUS')">australia</button>
-<button class="pooch-button" onclick="spinToLocation (-1.634, 0.35, 'MEX')">mexico</button>
-<button class="pooch-button" onclick="spinToLocation (0.03, 0.7, 'FRA')">france</button>
-<button class="pooch-button" onclick="spinToLocation (1.325, 0.425, 'IND')">india</button>
+<button class="pooch-button" onclick="spinToLocation (-1.634, 0.59, 'USA')">United States</button>
+<button class="pooch-button" onclick="spinToLocation (-1.634, 0.68, 'CAN')">Canada</button>
+<button class="pooch-button" onclick="spinToLocation (2.075, 0.325, 'PHL')">Philippines</button>
+<button class="pooch-button" onclick="spinToLocation (1.325, 0.425, 'IND')">India</button>
+<button class="pooch-button" onclick="spinToLocation (0.03, 0.7, 'FRA')">France</button>
+
 </div>
 </body>
 </html>
