@@ -26,7 +26,7 @@
 </head>
 <body onload="adjustLayout()">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato" />
-<link rel="stylesheet" type="text/css" href="../templates/globe-styles.css" />
+<link rel="stylesheet" type="text/css" href="../static/globe-styles.css" />
 <script id="popupLayout1" type="text/html">
 <div class="pooch-popup1">
 <div class="pooch-popup1-title">data.admin</div>
@@ -138,7 +138,7 @@ distMax   = 10000,
 lat       = y / ratio,
 lng       = x / ratio,
 projX     = Math.cos (lat) * Math.sin (lng  - offsetLng),
-projY     = Math.cos (offsetLat) * Math.sin (lat) - Math.sin (offsetLat) * Math.cos (lat) * Math.cos (lng  - offsetLng),
+projY     = Math.cos (offsetLat) * Math.sin (lat) - Math.sin (offsetLat) * Math.cos  (lat) * Math.cos (lng  - offsetLng),
 destLat   = (y - offsetLat * ratio) * radians,
 destLon   = (x - (offsetLng * ratio)) * radians,
 latRadOff = (offsetLat * ratio) * radians,
