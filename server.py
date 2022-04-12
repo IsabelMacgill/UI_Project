@@ -93,9 +93,10 @@ def learn():
 
 @app.route('/learn/<id>')
 def view_dessert(id=None):
-    index = id
+    global desserts 
+    dessert = desserts[id]
     
-    return render_template('view_dessert.html', data = data, index = index)
+    return render_template('view_dessert.html', data = dessert, id = id)
     
 
 @app.route('/quiz', methods=['GET', 'POST'])
