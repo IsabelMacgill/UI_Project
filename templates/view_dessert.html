@@ -2,13 +2,13 @@
 
 {% block content %}
 
+<script type="text/javascript" src="{{ url_for('static', filename = 'learn.js') }}"></script>
 <script>
 
 	let data = {{data|tojson}}
-	let id = {{index|tojson}}
+	let id = {{id|tojson}}
 	
 </script>
-<script src="../static/view_dessert.js"></script>
 
 <div class="containter">
 	<div class="row">

@@ -83,18 +83,19 @@ desserts = {
 
 @app.route('/')
 def homepage():
-   return render_template('homepage.html', data = data)
+   return render_template('homepage.html')
 
 
 @app.route('/learn')
 def learn():
-    return render_template('learn.html', data = data)
+    return render_template('learn.html')
     
 
 @app.route('/learn/<id>')
 def view_dessert(id=None):
     global desserts 
     dessert = desserts[id]
+    print(dessert)
     
     return render_template('view_dessert.html', data = dessert, id = id)
     
