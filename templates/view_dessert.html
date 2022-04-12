@@ -10,7 +10,32 @@
 </script>
 <script src="../static/view_dessert.js"></script>
 
-<div>
+<div class="containter">
+	<div class="row">
+		<div class ="column">
+			<div id="flashcardlabel"> Flashcards</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class= "col-2">
+			<button id="back">Back</button>
+		</div>
+		<div class= "col-5">
+			<div id="flashcard">
+				<div class="row name"></div>
+				<div class="row img"></div>
+				<div class="row description"></div>
+			</div>
+		</div>
+		<div class="col-5">
+			<div id="map">
+				<div id="mapImg"></div>
+				<div id="countryLabel">Country Selected:</div>
+				<button id="next"></button>
+			</div>
+	</div>
+
 </div>
 
 {% endblock %}
