@@ -12,6 +12,9 @@ function display(data){
     });
     let countryName = new $("<span> &nbsp" + data["country"] + "</span>");
     $("#countryLabel").append(countryName);
+
+    let map = new $("<img id=map src=" + data["map"] + "></img");
+    $("#mapImg").append(map);
 }
 
 $(document).ready(function(){

@@ -17,11 +17,16 @@
     padding:10px;
     justify-content: center;
 }
-img{
+#image img{
     width: 500px;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 10px 5px 5px #9ac9b3;
+}
+#map{
+    width: 200px;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 #description{
     margin-top: 10px;
