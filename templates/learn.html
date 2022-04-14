@@ -5,7 +5,7 @@
 
 <script>
 
-	let data = {{results|tojson}}
+	
 	
 </script>
 <script src="../static/learn.js"></script>
@@ -32,10 +32,11 @@
 <div class="pooch-popup1-heightAdj"></div>
 </div>
 </script>
-<div class="pooch-title" style="margin-bottom:24px">Select a country to learn more about their desserts<span style="font-size:18px;color:#AAA;"> &nbsp; <button class = "pooch-button">GO</button></span></div>
+<div class="pooch-title" style="margin-bottom:24px">Select a country to learn more about their desserts<span style="font-size:18px;color:#AAA;"> &nbsp; <button class = "pooch-button" onclick="changePage()">GO</button></span></div>
 <div class="pooch-stage" style="height:500px"></div>
 <script type="text/javascript">
 var offsetLng   = 0,
+select = 0,
 offsetLat   = 0,
 lastMouseX  = 0,
 lastMouseY  = 0,
@@ -63,13 +64,21 @@ chart1       = pooch.chart (".pooch-stage").symbolGroup ([symbols1])
 .width (800)
 .projection (customOrtho)
 .bounds ([1, 1.6, -1, -1.6]);
+
+function changeSelect(num){
+	select = num;
+}
+function changePage(){
+	url = "/learn/" + select;
+    window.location.assign(url);
+}
 function adjustLayout ()
 {
 chart1.mouseDown (onMouseDown);
 chart1.mouseMove (onMouseMove);
 pooch.fetch (document).mouseUp(function () { mouseIsDown = false; chart1.mouseIgnore (false); });
 pooch.fetch ("#pooch_back_chart0").css ({ "background-color": "#c6ddff" });
-pooch.fetch ("#pooch_main_chart0").css ({ "background-image": "url(./images/globe-cover.png)", "background-position": "center center" });
+pooch.fetch ("#pooch_main_chart0").css ({ "background-image": "url(/static/images/globe-cover.png)", "background-position": "center center" });
 setTimeout (chart1.draw, 500);
 }
 function onMouseDown (e)
@@ -172,11 +181,11 @@ return { x: projX, y: projY };
 }
 </script>
 <div class="pooch-button-container">
-<button class="pooch-button" onclick="spinToLocation (-1.634, 0.59, 'USA')">United States</button>
-<button class="pooch-button" onclick="spinToLocation (-1.634, 0.68, 'CAN')">Canada</button>
-<button class="pooch-button" onclick="spinToLocation (2.075, 0.325, 'PHL')">Philippines</button>
-<button class="pooch-button" onclick="spinToLocation (1.325, 0.425, 'IND')">India</button>
-<button class="pooch-button" onclick="spinToLocation (0.03, 0.7, 'FRA')">France</button>
+<button id="UnitedStates" class="pooch-button" onclick="spinToLocation (-1.634, 0.59, 'USA');changeSelect(1)">United States</button>
+<button id="Canada" class="pooch-button" onclick="spinToLocation (-1.634, 0.68, 'CAN');changeSelect(3)">Canada</button>
+<button id="Philippines" class="pooch-button" onclick="spinToLocation (2.075, 0.325, 'PHL');changeSelect(5)">Philippines</button>
+<button id="India" class="pooch-button" onclick="spinToLocation (1.325, 0.425, 'IND');changeSelect(7)">India</button>
+<button id="France" class="pooch-button" onclick="spinToLocation (0.03, 0.7, 'FRA');changeSelect(9)">France</button>
 
 </div>
 </body>

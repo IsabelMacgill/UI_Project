@@ -142,6 +142,8 @@ questions = {
     }
 }
 
+users = {}
+
 userLearn = {
     "1":{
         "id": "1",
