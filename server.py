@@ -7,10 +7,10 @@ app = Flask(__name__)
 desserts = {
     "1":{
         "id": "1",
-        "name":"German Chcolate Cake",
+        "name":"German Chocolate Cake",
         "description": ["layered chocolate cake", "topped with coconut pecan frosting"],
         "country": "United States",
-        "image":"https://cooking.nytimes.com/recipes/1020098-nanaimo-bars"
+        "image":"/static/images/german.jpg"
     },
     "2":{
         "id": "2",

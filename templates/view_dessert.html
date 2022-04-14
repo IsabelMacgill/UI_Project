@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<script type="text/javascript" src="{{ url_for('static', filename = 'learn.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'view_dessert.js') }}"></script>
 <script>
 
 	let data = {{data|tojson}}
@@ -10,32 +10,47 @@
 	
 </script>
 
+<link rel="stylesheet" href="{{url_for('static', filename='view_dessert.css')}}">
+
 <div class="containter">
 	<div class="row">
-		<div class ="column">
+		<div class= "col">
 			<div id="flashcardlabel"> Flashcards</div>
 		</div>
 	</div>
-
 	<div class="row">
-		<div class= "col-2">
-			<button id="back">Back</button>
-		</div>
-		<div class= "col-5">
-			<div id="flashcard">
-				<div class="row name"></div>
-				<div class="row img"></div>
-				<div class="row description"></div>
+		<div class="col-1">
+			<div class="row">
+				<div id="back">
+					<button id="backButton">Back</button>
+				</div>
 			</div>
 		</div>
-		<div class="col-5">
-			<div id="map">
+		<div class="col-6">
+				<div class="row">
+					<div id="name"></div>
+				</div>
+				<div class="row">
+					<div id="image"></div>
+				</div> 
+				<div id="description">
+					<ul id="descriptionItem"></ul>
+				</div>
+		</div>
+		<div class="col-5" id="mapCol">
+			<div class="row">
 				<div id="mapImg"></div>
-				<div id="countryLabel">Country Selected:</div>
-				<button id="next"></button>
 			</div>
+			<div class="row">
+				<div id="countryLabel">Country Selected:</div>
+			</div>
+			<div class="row">
+				<div id="nextButtonDiv"> 
+					<button id="next">Next</button>
+				</div>
+			</div>
+		</div>
 	</div>
-
 </div>
 
 {% endblock %}
