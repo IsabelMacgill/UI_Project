@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import Response, request, jsonify
+from random import randint
+import socket
 app = Flask(__name__)
 
 
@@ -143,7 +145,7 @@ questions = {
     }
 }
 
-user = {}
+users = {}
 
 
 @app.route('/')
@@ -167,12 +169,43 @@ def view_dessert(id=None):
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    return render_template('quiz.html', data = desserts)
+    global users
+    host = socket.gethostname()
+    ip = socket.gethostbyname(host)
+    
+    if ip not in users:
+        users[ip] = {
+            "visited": [],
+            "total": "0",
+            "score": "0",
+        }
+        
+    user = users[ip]
+    
+    if user["total"] == "10":
+        user["total"] = "0"
+        
+    question = find_question(ip)
+    
+    
+    return render_template('quiz.html', desserts = desserts, question = question, user = user)
     
     
 @app.route('/results')
 def results():
     return render_template('results.html')
+    
+def find_question(ip):
+    global questions
+    global users
+    
+    question_value = randint(1, 10)
+    while str(question_value) in users[ip]["visited"]:
+        question_value = randint(1, 10)
+    
+    users[ip]["visited"].append(str(question_value))
+    
+    return questions[str(question_value)]
 
 
 if __name__ == '__main__':
