@@ -87,9 +87,6 @@ desserts = {
         "image":"/static/images/crepe.jpg",
         "map":"/static/images/france.jpg"
     },
-
-    
-
 }
 
 questions = {
@@ -145,8 +142,79 @@ questions = {
     }
 }
 
-users = {}
-
+userLearn = {
+    "1":{
+        "id": "1",
+        "name":"German Chocolate Cake",
+        "page": "/learn/1",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "2":{    
+        "id": "2",
+        "name":"Sopaipilla",
+        "page": "/learn/2",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "3":{
+        "id": "3",
+        "name":"",
+        "page": "/learn/3",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "4":{
+        "id": "4",
+        "name":"Beavertail",
+        "page": "/learn/4",
+        "enteredTime": "",
+        "timeOnPage":""
+        
+    },
+    "5":{
+        "id": "5",
+        "name":"Ube Halaya",
+        "page": "/learn/5",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+     "6":{
+        "id": "6",
+        "name":"Buko Pandan",
+        "page": "/learn/6",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "7":{
+        "id": "7",
+        "name":"Jalebi",
+        "page": "/learn/7",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "8":{
+        "id": "8",
+        "name":"Gulab Jamun",
+        "page": "/learn/8",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "9":{
+        "id": "9",
+        "name":"Danish Pastries",
+        "page": "/learn/9",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+    "10":{
+        "id": "10",
+        "name":"Crepe Cake",
+        "page": "/learn/10",
+        "enteredTime": "",
+        "timeOnPage":""
+    },
+}
 
 @app.route('/')
 def homepage():
