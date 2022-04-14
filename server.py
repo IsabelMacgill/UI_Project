@@ -90,6 +90,61 @@ desserts = {
 
 }
 
+questions = {
+    "1":{
+        "question":"Where does German Chocolate Cake originate from?",
+        "options":["United States","Germany","Canada","Cuba"],
+        "answer":"United States"
+    },
+    "2":{
+        "question":"Where does Sopaipilla originate from?",
+        "options":["Denmark","Canada","United States","Mexico"],
+        "answer":"layered cookie bars"
+    },
+    "3":{
+        "question":"What are Nanaimo Bars?",
+        "options":["protein bars","layered cookie bars","savory bars","chocolate layered bars"],
+        "answer":"layered cookie bars"
+    },
+    "4":{
+        "question":"Where do Beavertails originate from?",
+        "options":["Canada","France","Denmark","United States"],
+        "answer":"Canada"
+    },
+    "5":{
+        "question":"What is Ube Halaya?",
+        "options":["taro pudding","purple yam jam", "purple rice cake", "acai"],
+        "answer":"purple yam jam"
+    },
+    "6":{
+        "question":"Where does Buko Pandan originate from?",
+        "options":["Philippines","Germany","Denmark","United States"],
+        "answer":"Philippines"
+    },
+    "7":{
+        "question":"Which dessert originated from India?",
+        "options":["Paneer Tikka","Jalebi","Chana Masala","Rose Cardamom Pops"],
+        "answer":"Jalebi"
+    },
+    "8":{
+        "question":"Where does Gulab Jamun originate from?",
+        "options":["Philippines", "United States", "Mexico","India"],
+        "answer":"India"
+    },
+    "9":{
+        "question":"Which dessert originated from the United States?",
+        "options":["Danish Pastries","Beavertails","Crepe Cake","Nanaimo Bars"],
+        "answer":"Danish Pastries"
+    },
+    "10":{
+        "question":"Where does Crepe Cake originate from?",
+        "options":["Germany", "United States","Mexico","France"],
+        "answer":"France"
+    }
+}
+
+user = {}
+
 
 @app.route('/')
 def homepage():
