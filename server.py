@@ -102,7 +102,7 @@ def view_dessert(id=None):
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    return render_template('quiz.html')
+    return render_template('quiz.html', data = desserts)
     
     
 @app.route('/results')
