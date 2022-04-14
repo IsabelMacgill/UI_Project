@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+
 {% block content %}
 
 <script>
@@ -12,14 +13,10 @@
 <div>
 </div>
 
-{% endblock %}
+<!-- src code: http://blueshirt.com/pooch/examples/interactive-globe.html -->
 
-// src code: http://blueshirt.com/pooch/examples/interactive-globe.html 
-
-<!DOCTYPE html>
 <html>
 <head>
-<title>interactive globe - pooch.js</title>
 <script type="text/javascript" src="../static/pooch.js"></script>
 <script type="text/javascript" src="../static/world-shapes.js"></script>
 <script type="text/javascript" src="../static/world-data.js"></script>
@@ -35,7 +32,7 @@
 <div class="pooch-popup1-heightAdj"></div>
 </div>
 </script>
-<div class="pooch-title" style="margin-bottom:24px">interactive globe<span style="font-size:18px;color:#AAA;"> &nbsp;(click and drag to rotate)</span></div>
+<div class="pooch-title" style="margin-bottom:24px">Select a country to learn more about their desserts<span style="font-size:18px;color:#AAA;"> &nbsp; <button class = "pooch-button">GO</button></span></div>
 <div class="pooch-stage" style="height:500px"></div>
 <script type="text/javascript">
 var offsetLng   = 0,
@@ -184,3 +181,5 @@ return { x: projX, y: projY };
 </div>
 </body>
 </html>
+
+{% endblock %}
