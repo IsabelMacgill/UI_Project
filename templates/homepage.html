@@ -3,28 +3,29 @@
 {% block content %}
 
 <script>
-
-	let data = {{data|tojson}}
-	
 </script>
 <script src="../static/homepage.js"></script>
-<link href="../static/main.css" rel="stylesheet" type"text/css">
-
 
 <div class="col-12">
 	<div class="row center">
-		Determine the Country of Origin of Desserts
+		<div class="col-12 center title">
+			Determine the Country of Origin of Desserts
+		</div>
 	</div>
 	<div class="row center">
-		Have you ever wanted to know the country of origin of your favorite
-		desserts? Use this site to learn more about the origin of desserts from
-		all over the world and then test your knowledge to see if you are a
-		dessert origin expert!
+		<div class="col-12 center description">
+			Have you ever wanted to know the country of origin of your favorite
+			desserts? Use this site to learn more about the origin of desserts
+			from all over the world and then test your knowledge to see if you
+			are a dessert origin expert!
+		</div>
 	</div>
 	<div class="row center">
-		<a href="/learn">
-			<button class="btn" id="learn-button">Start Learning</button>
-		</a>
+		<div class="col-12 center">
+			<a href="/learn">
+				<button class="btn btn-primary" id="learn-button">Start Learning</button>
+			</a>
+		</div>
 	</div>
 </div>
 
