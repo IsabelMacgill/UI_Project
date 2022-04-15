@@ -91,51 +91,61 @@ desserts = {
 
 questions = {
     "1":{
+        "id":"1",
         "question":"Where does German Chocolate Cake originate from?",
         "options":["United States","Germany","Canada","Cuba"],
         "answer":"United States"
     },
     "2":{
+        "id":"2",
         "question":"Where does Sopaipilla originate from?",
         "options":["Denmark","Canada","United States","Mexico"],
         "answer":"layered cookie bars"
     },
     "3":{
+        "id":"3",
         "question":"What are Nanaimo Bars?",
         "options":["protein bars","layered cookie bars","savory bars","chocolate layered bars"],
         "answer":"layered cookie bars"
     },
     "4":{
+        "id":"4",
         "question":"Where do Beavertails originate from?",
         "options":["Canada","France","Denmark","United States"],
         "answer":"Canada"
     },
     "5":{
+        "id":"5",
         "question":"What is Ube Halaya?",
         "options":["taro pudding","purple yam jam", "purple rice cake", "acai"],
         "answer":"purple yam jam"
     },
     "6":{
+        "id":"6",
         "question":"Where does Buko Pandan originate from?",
         "options":["Philippines","Germany","Denmark","United States"],
         "answer":"Philippines"
     },
     "7":{
+        "id":"7",
         "question":"Which dessert originated from India?",
         "options":["Paneer Tikka","Jalebi","Chana Masala","Rose Cardamom Pops"],
         "answer":"Jalebi"
     },
     "8":{
+        "id":"8",
         "question":"Where does Gulab Jamun originate from?",
         "options":["Philippines", "United States", "Mexico","India"],
         "answer":"India"
     },
     "9":{
+        "id":"9",
         "question":"Which dessert originated from the United States?",
         "options":["Danish Pastries","Beavertails","Crepe Cake","Nanaimo Bars"],
         "answer":"Danish Pastries"
     },
     "10":{
+        "id":"10",
         "question":"Where does Crepe Cake originate from?",
         "options":["Germany", "United States","Mexico","France"],
         "answer":"France"
@@ -252,8 +262,11 @@ def quiz():
         
     user = users[ip]
     
+    user["total"] = str(int(user["total"]) + 1)
+    
     if user["total"] == "10":
         user["total"] = "0"
+        user["visited"] = []
         
     question = find_question(ip)
     
