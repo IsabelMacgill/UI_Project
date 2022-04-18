@@ -69,9 +69,12 @@ function changeSelect(num){
 	select = num;
 }
 function changePage(){
-	url = "/learn/" + select;
-    window.location.assign(url);
+	if (select != 0){
+		url = "/learn/" + select;
+    	window.location.assign(url);
+	}
 }
+
 function adjustLayout ()
 {
 chart1.mouseDown (onMouseDown);
