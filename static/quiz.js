@@ -1,15 +1,77 @@
 $(function(){
 	createQuestion(desserts, question)
+	$('label[for=1]').html(question["options"][0]);
+	$('#option-1').val(question["options"][0])
+	$('label[for=2]').html(question["options"][1]);
+	$('#option-2').val(question["options"][1])
+	$('label[for=3]').html(question["options"][2]);
+	$('#option-3').val(question["options"][2])
+	$('label[for=4]').html(question["options"][3]);
+	$('#option-4').val(question["options"][3])
+	$('#next').text("Submit")
+	
 });
 
 $(document).ready(function(){
 	console.log(desserts)
 	console.log(question)
 	console.log(user)
+	
+	$( "#next" ).click(function(){
+		if ($('input[name="answers"]:checked').val() === question["answer"]){
+			var updated_user = {
+					"id": user["id"],
+					"visited": user["visited"],
+					"total": user["total"],
+					"score": (parseInt(user["score"]) + 1).toString()				
+			}
+		} else{
+			var updated_user = {
+					"id": user["id"],
+					"visited": user["visited"],
+					"total": user["total"],
+					"score": user["score"]				
+			}
+		}
+		if (user["total"] === "10"){
+			$.ajax({
+				type: "POST",
+				url: "answer_question",                
+				dataType : "json",
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(updated_user),
+				success: function(result){
+					window.location.replace("/results")
+				},
+				error: function(request, status, error){
+					console.log("Error")
+					console.log(request)
+					console.log(status)
+					console.log(error)
+				}
+			});
+		} else{
+			$.ajax({
+				type: "POST",
+				url: "answer_question",                
+				dataType : "json",
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(updated_user),
+				success: function(result){
+					window.location.reload();
+				},
+				error: function(request, status, error){
+					console.log("Error")
+					console.log(request)
+					console.log(status)
+					console.log(error)
+				}
+			});
+		}
+	});
 });
 
 function createQuestion(desserts, question){
-	console.log("called")
 	let setEntry = document.createElement('div')
 	setEntry.classList.add('col-12')
 	let setQuestion = document.createElement('div')
@@ -18,18 +80,6 @@ function createQuestion(desserts, question){
 	let setQuestionImage = document.createElement('img')
 	setQuestionImage.classList.add('img-fluid')
 	setQuestionImage.src = desserts[question["id"]]["image"]
-	let setFirstOption = document.createElement('div')
-	setFirstOption.classList.add('row')
-	setFirstOption.classList.add('answer')
-	let setSecondOption = document.createElement('div')
-	setSecondOption.classList.add('row')
-	setSecondOption.classList.add('answer')
-	let setThirdOption = document.createElement('div')
-	setThirdOption.classList.add('row')
-	setThirdOption.classList.add('answer')
-	let setFourthOption = document.createElement('div')
-	setFourthOption.classList.add('row')
-	setFourthOption.classList.add('answer')
 	
 	
 	let setQuestionMap = document.createElement('img')
@@ -38,19 +88,11 @@ function createQuestion(desserts, question){
 				
 	
 	$(setQuestion).text(question["question"])
-	$(setFirstOption).text(question["options"][0])
-	$(setSecondOption).text(question["options"][1])
-	$(setThirdOption).text(question["options"][2])
-	$(setFourthOption).text(question["options"][3])
 	
 	
 	setEntry.appendChild(setQuestion)
 	setEntry.appendChild(setQuestionImage)
-	setEntry.appendChild(setFirstOption)
-	setEntry.appendChild(setSecondOption)
-	setEntry.appendChild(setThirdOption)
-	setEntry.appendChild(setFourthOption)
 	$("#question").append(setEntry)
-	$("#title").append(parseInt(user["total"]) + 1)
+	$("#title").append(parseInt(user["total"]))
 	$("#map").append(setQuestionMap)
 }

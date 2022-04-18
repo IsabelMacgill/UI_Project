@@ -4,7 +4,8 @@
 
 <script>
 
-	let data = {{results|tojson}}
+	let desserts = {{desserts|tojson}}
+	let user = {{user|tojson}}
 	
 </script>
 <script src="../static/results.js"></script>
@@ -13,8 +14,8 @@
 	<div class="row">
 		Review
 	</div>
-	<div class="row">
-		Score
+	<div id="score" class="row">
+		You scored a 
 	</div>
 	<div class="row">
 		You are on your way to becoming a dessert origin expert!
@@ -23,14 +24,6 @@
 	</div>
 	<div class="row">
 		Thanks for taking the time to do this quiz.
-	</div>
-	<div class="row">
-		<div class="col-6">
-			Your results show room for improvement in the following categories
-		</div>
-		<div class="col-6">
-			Add Categories Here
-		</div>
 	</div>
 	<div class="row">
 		Want to learn more?

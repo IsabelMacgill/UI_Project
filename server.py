@@ -255,6 +255,7 @@ def quiz():
     
     if ip not in users:
         users[ip] = {
+            "id": ip,
             "visited": [],
             "total": "0",
             "score": "0",
@@ -263,20 +264,49 @@ def quiz():
     user = users[ip]
     
     user["total"] = str(int(user["total"]) + 1)
-    
-    if user["total"] == "10":
-        user["total"] = "0"
-        user["visited"] = []
         
     question = find_question(ip)
     
     
     return render_template('quiz.html', desserts = desserts, question = question, user = user)
     
+
+@app.route('/answer_question', methods=['GET', 'POST'])
+def answer_question():
+    global users
+    
+    json_data = request.get_json()
+    userId = json_data["id"]
+    visited = json_data["visited"]
+    total = json_data["total"]
+    score = json_data["score"]
+    
+    users[userId] = {
+    "id": userId,
+    "visited": visited,
+    "total": total,
+    "score": score
+    }
+        
+    return jsonify(ip = userId)
+    
     
 @app.route('/results')
 def results():
-    return render_template('results.html')
+    global users
+    host = socket.gethostname()
+    ip = socket.gethostbyname(host)
+    
+    user = users[ip]
+    
+    users[ip] = {
+        "id": ip,
+        "visited": [],
+        "total": "0",
+        "score": "0",
+    }
+        
+    return render_template('results.html', desserts = desserts, user = user)
     
 def find_question(ip):
     global questions
