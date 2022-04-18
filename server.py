@@ -159,72 +159,72 @@ userLearn = {
         "id": "1",
         "name":"German Chocolate Cake",
         "page": "/learn/1",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime": "0",
+        "timeOnPage":"0"
     },
     "2":{    
         "id": "2",
         "name":"Sopaipilla",
         "page": "/learn/2",
-        "enteredTime": "",
-        "timeOnPage":""
+         "enteredTime": "0",
+        "timeOnPage":"0"
     },
     "3":{
         "id": "3",
         "name":"",
         "page": "/learn/3",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime":"0",
+        "timeOnPage":"0"
     },
     "4":{
         "id": "4",
         "name":"Beavertail",
         "page": "/learn/4",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime":"0",
+        "timeOnPage":"0"
         
     },
     "5":{
         "id": "5",
         "name":"Ube Halaya",
         "page": "/learn/5",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime": "0",
+        "timeOnPage":"0"
     },
      "6":{
         "id": "6",
         "name":"Buko Pandan",
         "page": "/learn/6",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime":"0",
+        "timeOnPage":"0"
     },
     "7":{
         "id": "7",
         "name":"Jalebi",
         "page": "/learn/7",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime":"0",
+        "timeOnPage":"0"
     },
     "8":{
         "id": "8",
         "name":"Gulab Jamun",
         "page": "/learn/8",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime": "0",
+        "timeOnPage":"0"
     },
     "9":{
         "id": "9",
         "name":"Danish Pastries",
         "page": "/learn/9",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime": "0",
+        "timeOnPage":"0"
     },
     "10":{
         "id": "10",
         "name":"Crepe Cake",
         "page": "/learn/10",
-        "enteredTime": "",
-        "timeOnPage":""
+        "enteredTime": "0",
+        "timeOnPage":"0"
     },
 }
 
@@ -245,7 +245,61 @@ def view_dessert(id=None):
     print(dessert)
     
     return render_template('view_dessert.html', data = dessert, id = id)
-    
+
+@app.route('/enter_user', methods=['POST'])
+def edit_enter():
+    global userLearn
+    global desserts
+
+    json_data = request.get_json() 
+    print(json_data)
+
+    key = json_data['id']
+    viewing = userLearn[key]
+    if type(viewing) is tuple:
+        viewing = viewing[0]
+    print(viewing)
+
+
+    value = {
+        "id":key,
+        "name":desserts[key]["name"],
+        "page": "/learn/" + key,
+        "enteredTime": json_data["enteredTime"],
+        "timeOnPage": viewing["timeOnPage"]
+    },
+    userLearn[key] = value
+
+    return jsonify(data = userLearn[key], id=key)
+
+@app.route('/leave_user', methods=['POST'])
+def edit_time():
+    global userLearn
+    global desserts
+
+    json_data = request.get_json()
+    print(json_data)
+
+    key = json_data['id']
+    viewing = userLearn[key]
+    if type(viewing) is tuple:
+        viewing = viewing[0]
+    print(viewing)
+    time = str(int(json_data["leftTime"]) - int(viewing["enteredTime"]))
+
+    value = {
+        "id":key,
+        "name":desserts[key]["name"],
+        "page": "/learn/" + key,
+        "entertedTime": viewing["enteredTime"],
+        "timeOnPage": time
+    },
+    userLearn[key] = value
+
+    return jsonify(data = userLearn[key], id=key)
+
+
+
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
