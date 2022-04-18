@@ -100,7 +100,7 @@ questions = {
         "id":"2",
         "question":"Where does Sopaipilla originate from?",
         "options":["Denmark","Canada","United States","Mexico"],
-        "answer":"layered cookie bars"
+        "answer":"United States"
     },
     "3":{
         "id":"3",
@@ -304,25 +304,22 @@ def edit_time():
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     global users
-    host = socket.gethostname()
-    ip = socket.gethostbyname(host)
     
-    if ip not in users:
-        users[ip] = {
-            "id": ip,
+    if 0 not in users:
+        users[0] = {
+            "id": 0,
             "visited": [],
             "total": "0",
             "score": "0",
         }
         
-    user = users[ip]
-    
-    user["total"] = str(int(user["total"]) + 1)
+    user = users[0]
         
-    question = find_question(ip)
+    question_value = find_question()
+    question = questions[str(question_value)]
     
     
-    return render_template('quiz.html', desserts = desserts, question = question, user = user)
+    return render_template('quiz.html', desserts = desserts, question = question, question_value=question_value, user = user)
     
 
 @app.route('/answer_question', methods=['GET', 'POST'])
@@ -335,26 +332,24 @@ def answer_question():
     total = json_data["total"]
     score = json_data["score"]
     
-    users[userId] = {
+    users[0] = {
     "id": userId,
     "visited": visited,
     "total": total,
     "score": score
     }
         
-    return jsonify(ip = userId)
+    return jsonify(id = userId)
     
     
 @app.route('/results')
 def results():
     global users
-    host = socket.gethostname()
-    ip = socket.gethostbyname(host)
     
-    user = users[ip]
+    user = users[0]
     
-    users[ip] = {
-        "id": ip,
+    users[0] = {
+        "id": 0,
         "visited": [],
         "total": "0",
         "score": "0",
@@ -362,17 +357,16 @@ def results():
         
     return render_template('results.html', desserts = desserts, user = user)
     
-def find_question(ip):
+def find_question():
     global questions
     global users
     
     question_value = randint(1, 10)
-    while str(question_value) in users[ip]["visited"]:
+    print(users[0]["visited"])
+    while question_value in users[0]["visited"]:
         question_value = randint(1, 10)
     
-    users[ip]["visited"].append(str(question_value))
-    
-    return questions[str(question_value)]
+    return question_value
 
 
 if __name__ == '__main__':

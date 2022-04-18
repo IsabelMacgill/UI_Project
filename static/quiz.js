@@ -18,22 +18,23 @@ $(document).ready(function(){
 	console.log(user)
 	
 	$( "#next" ).click(function(){
+		user["visited"].push(question_value)
 		if ($('input[name="answers"]:checked').val() === question["answer"]){
 			var updated_user = {
 					"id": user["id"],
 					"visited": user["visited"],
-					"total": user["total"],
+					"total": (parseInt(user["total"]) + 1).toString(),
 					"score": (parseInt(user["score"]) + 1).toString()				
 			}
 		} else{
 			var updated_user = {
 					"id": user["id"],
 					"visited": user["visited"],
-					"total": user["total"],
+					"total": (parseInt(user["total"]) + 1).toString(),
 					"score": user["score"]				
 			}
 		}
-		if (user["total"] === "10"){
+		if (updated_user["total"] === "10"){
 			$.ajax({
 				type: "POST",
 				url: "answer_question",                
@@ -93,6 +94,6 @@ function createQuestion(desserts, question){
 	setEntry.appendChild(setQuestion)
 	setEntry.appendChild(setQuestionImage)
 	$("#question").append(setEntry)
-	$("#title").append(parseInt(user["total"]))
+	$("#title").append(parseInt(user["total"])+1)
 	$("#map").append(setQuestionMap)
 }
