@@ -18,7 +18,8 @@
     justify-content: center;
 }
 #image img{
-    width: 500px;
+    width: 400px;
+    height: 300px;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 10px 5px 5px #9ac9b3;

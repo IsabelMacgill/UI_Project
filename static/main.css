@@ -23,3 +23,17 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.navbar{
+	background-color: #ddebdd;
+}
+
+#learn-button{
+	background-color: #b5cfa3;
+	border: #bdd6ac;
+	color: black;
+}
+
+.navbar-brand{
+	color: black;
+}
