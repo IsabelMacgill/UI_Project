@@ -1,4 +1,5 @@
 $(function(){
+	$("#score").append(parseInt(user["score"]))
 	
 });
 
