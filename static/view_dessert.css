@@ -1,10 +1,4 @@
-#flashcardlabel{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    justify-content: center;
-    margin-top:20px;
-    margin-bottom: 20px;
-}
+
 
 #name{
     font-family: Arial, Helvetica, sans-serif;
@@ -17,29 +11,42 @@
     padding:10px;
     justify-content: center;
 }
-#image img{
-    width: 400px;
-    height: 300px;
-    margin-bottom: 20px;
+#image{
+    width: 650px;
+    height: 450px;
     border-radius: 10px;
     box-shadow: 10px 5px 5px #9ac9b3;
+    border-color: white;
+    margin-bottom: 20px;
+    padding:0px;
+    outline:none;
 }
+
+#image:hover{
+    cursor:pointer;
+}
+
+#image img{
+    width: 650px;
+    height: 450px;
+    border-radius: 10px;
+}
+
+#description{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:20px;
+}
+.descriptionBullet{
+    position:relative;
+    left: 10%;
+}
+
 #map{
     width: 200px;
     margin-bottom: 20px;
     border-radius: 10px;
 }
-#description{
-    margin-top: 10px;
-    margin-left: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:18px;
-    margin-bottom: 20px;
-}
-#back{
-    position: relative;
-    top:500px;
-}
+
 #backButton{
     background-color: #9ac9b3;
     color:#43544c;

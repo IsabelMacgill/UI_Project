@@ -1,15 +1,17 @@
+var image =1;
 
 function display(data){
     $("#name").text(data["name"]);
     console.log(data["name"]);
 
-    let image = new $("<img src=" + data["image"] + "></img");
+    let image = new $("<img id=picture src=" + data["image"] + "></img");
     $("#image").append(image);
 
     $.each(data["description"], function (index, t) {
         let d1 = new $("<div class='row descriptionItem'> <li class=descriptionBullet>"+ t + "</li></div>");
         $("#description").append(d1);
     });
+    $("#description").css("display", "none");
     let countryName = new $("<span> &nbsp" + data["country"] + "</span>");
     $("#countryLabel").append(countryName);
 
@@ -63,6 +65,7 @@ function leaveTime(id){
     });
 }
 
+
 $(document).ready(function(){
 	display(data)
     enterTime(id);
@@ -91,6 +94,22 @@ $(document).ready(function(){
         else{
              url = "/learn";
              window.location.assign(url);
+        }
+    });
+
+    $("#image").click(function (event){
+        if(image == 1){
+            $("#picture").css("display","none");
+            $("#description").css("display","block");
+            $("#image").css("padding", "0px 20px");
+            image = 2;
+        }
+        else{
+            console.log("clicked = 0");
+            $("#picture").css("display","block");
+            $("#description").css("display","none");
+            $("#image").css("padding", "0px");
+            image = 1;
         }
     });
 
