@@ -113,6 +113,11 @@ $(document).ready(function(){
         }
     });
 
+    $("#globeBack").click(function (event){
+        url = "/learn";
+        window.location.assign(url);
+    });
+
     $("north-america").click(function (event){
         event.preventDefault();
         leaveTime(id);
