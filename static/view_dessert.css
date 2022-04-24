@@ -1,12 +1,7 @@
-#flashcardlabel{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    justify-content: center;
-    margin-top:20px;
-    margin-bottom: 20px;
-}
+
 
 #name{
+    margin: 10px 0px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 40px;
     padding: 5px 0px;
@@ -17,47 +12,54 @@
     padding:10px;
     justify-content: center;
 }
+#image{
+    width: 700px;
+    height: 450px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #43544c;
+    border-color: white;
+    margin-bottom: 20px;
+    padding:0px;
+    outline:none;
+}
+
+#image:hover{
+    cursor:pointer;
+}
+
 #image img{
-    width: 400px;
-    height: 300px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 10px 5px 5px #9ac9b3;
-}
-#map{
-    width: 200px;
-    margin-bottom: 20px;
+    width: 700px;
+    height: 450px;
     border-radius: 10px;
 }
+
 #description{
-    margin-top: 10px;
-    margin-left: 30px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size:18px;
-    margin-bottom: 20px;
+    font-size:20px;
 }
-#back{
-    position: relative;
-    top:500px;
+.descriptionBullet{
+    position:relative;
+    left: 10%;
 }
-#backButton{
-    background-color: #9ac9b3;
-    color:#43544c;
-    font-size: 15px;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
+
+#map{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
 }
+
+#mapRow{
+    margin-top: 75px;
+}
+
 #countryLabel{
     margin-top: 80px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size:20px;
+    font-size:30px;
     margin-bottom: 20px;
 }
-#countrylabel span{
-    font-weight: bold;
-}
-#next{
+
+.buttonStyle{
     background-color: #9ac9b3;
     color:#43544c;
     font-size: 15px;
@@ -65,5 +67,7 @@
     border: none;
     border-radius: 5px;
 }
-
+#globeBack{
+    margin: 20px
+}
 

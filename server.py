@@ -19,7 +19,7 @@ desserts = {
         "id": "2",
         "name":"Sopaipilla",
         "description": ["light and crispy pastry puff", "deep fried dough"],
-        "country": "United States of America",
+        "country": "United States",
         "image":"/static/images/sopaipilla.jpg",
         "map":"/static/images/usa.jpg"
     },
