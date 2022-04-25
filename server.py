@@ -241,7 +241,6 @@ userLearn = {
         "total": "0",
         "score": "0",
     }
-    
 }
 
 @app.route('/')

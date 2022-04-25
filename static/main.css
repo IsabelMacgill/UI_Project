@@ -42,3 +42,12 @@
 	height: 50px;
 	border: 1px solid gray;
 }
+
+.correct{
+	color: green;
+	font-weight: bold;
+}
+
+.incorrect{
+	color: red;
+}
