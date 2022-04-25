@@ -94,65 +94,74 @@ questions = {
         "id":"1",
         "question":"Where does German Chocolate Cake originate from?",
         "options":["United States","Germany","Canada","Cuba"],
-        "answer":"United States"
+        "answer":"United States",
+        "format":"choice"
     },
     "2":{
         "id":"2",
         "question":"Where does Sopaipilla originate from?",
         "options":["Denmark","Canada","United States","Mexico"],
-        "answer":"United States"
+        "answer":"United States",
+        "format":"choice"
     },
     "3":{
         "id":"3",
-        "question":"What are Nanaimo Bars?",
+        "question":"Drag the item to the appropriate description.",
         "options":["protein bars","layered cookie bars","savory bars","chocolate layered bars"],
-        "answer":"layered cookie bars"
+        "answer":"layered cookie bars",
+        "format":"drag"
     },
     "4":{
         "id":"4",
         "question":"Where do Beavertails originate from?",
         "options":["Canada","France","Denmark","United States"],
-        "answer":"Canada"
+        "answer":"Canada",
+        "format":"choice"
     },
     "5":{
         "id":"5",
-        "question":"What is Ube Halaya?",
+        "question":"Drag the item to the appropriate description.",
         "options":["taro pudding","purple yam jam", "purple rice cake", "acai"],
-        "answer":"purple yam jam"
+        "answer":"purple yam jam",
+        "format":"drag"
     },
     "6":{
         "id":"6",
         "question":"Where does Buko Pandan originate from?",
         "options":["Philippines","Germany","Denmark","United States"],
-        "answer":"Philippines"
+        "answer":"Philippines",
+        "format":"choice"
     },
     "7":{
         "id":"7",
         "question":"Which dessert originated from India?",
         "options":["Paneer Tikka","Jalebi","Chana Masala","Rose Cardamom Pops"],
-        "answer":"Jalebi"
+        "answer":"Jalebi",
+        "format":"choice"
     },
     "8":{
         "id":"8",
         "question":"Where does Gulab Jamun originate from?",
         "options":["Philippines", "United States", "Mexico","India"],
-        "answer":"India"
+        "answer":"India",
+        "format":"choice"
     },
     "9":{
         "id":"9",
         "question":"Which dessert originated from the United States?",
         "options":["Danish Pastries","Beavertails","Crepe Cake","Nanaimo Bars"],
-        "answer":"Danish Pastries"
+        "answer":"Danish Pastries",
+        "format":"choice"
     },
     "10":{
         "id":"10",
         "question":"Where does Crepe Cake originate from?",
         "options":["Germany", "United States","Mexico","France"],
-        "answer":"France"
+        "answer":"France",
+        "format":"choice"
     }
 }
 
-users = {}
 
 userLearn = {
     "1":{
@@ -226,6 +235,13 @@ userLearn = {
         "enteredTime": "0",
         "timeOnPage":"0"
     },
+    "quiz":{
+        "id": 0,
+        "visited": [],
+        "total": "0",
+        "score": "0",
+    }
+    
 }
 
 @app.route('/')
@@ -303,17 +319,9 @@ def edit_time():
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    global users
-    
-    if 0 not in users:
-        users[0] = {
-            "id": 0,
-            "visited": [],
-            "total": "0",
-            "score": "0",
-        }
+    global userLearn
         
-    user = users[0]
+    user = userLearn["quiz"]
         
     question_value = find_question()
     question = questions[str(question_value)]
@@ -324,7 +332,7 @@ def quiz():
 
 @app.route('/answer_question', methods=['GET', 'POST'])
 def answer_question():
-    global users
+    global userLearn
     
     json_data = request.get_json()
     userId = json_data["id"]
@@ -332,7 +340,7 @@ def answer_question():
     total = json_data["total"]
     score = json_data["score"]
     
-    users[0] = {
+    userLearn["quiz"] = {
     "id": userId,
     "visited": visited,
     "total": total,
@@ -344,11 +352,11 @@ def answer_question():
     
 @app.route('/results')
 def results():
-    global users
+    global userLearn
     
-    user = users[0]
+    user = userLearn["quiz"]
     
-    users[0] = {
+    userLearn["quiz"] = {
         "id": 0,
         "visited": [],
         "total": "0",
@@ -359,11 +367,11 @@ def results():
     
 def find_question():
     global questions
-    global users
+    global userLearn
     
     question_value = randint(1, 10)
-    print(users[0]["visited"])
-    while question_value in users[0]["visited"]:
+    print(userLearn["quiz"]["visited"])
+    while question_value in userLearn["quiz"]["visited"]:
         question_value = randint(1, 10)
     
     return question_value

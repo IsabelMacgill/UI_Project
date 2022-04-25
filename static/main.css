@@ -37,3 +37,8 @@
 .navbar-brand{
 	color: black;
 }
+
+.drop-answer{
+	height: 50px;
+	border: 1px solid gray;
+}
