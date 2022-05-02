@@ -6,6 +6,10 @@
 	
 }
 
+.btn{
+	color: #6D6D6D;
+}
+
 .center{
 	text-align: center;
 }
@@ -24,8 +28,12 @@
 	padding-bottom: 10px;
 }
 
+#description{
+	color: #6D6D6D;
+}
+
 .navbar{
-	background-color: #ddebdd;
+	background-color: #ECECECEC;
 }
 
 #learn-button{
