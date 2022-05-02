@@ -1,5 +1,5 @@
 $(function(){
-	$("#score").append(parseInt(user["score"]) + " out of 10!")
+	$("#score").append(parseFloat(user["score"]) + " out of 10!")
 	
 });
 

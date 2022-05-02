@@ -1,3 +1,7 @@
+var answerResults;
+
+console.log(user["score"])
+
 $(function(){
 	if (question["format"] === "choice"){
 		createChoiceQuestion(desserts, question)
@@ -37,14 +41,14 @@ $(document).ready(function(){
 					var updated_user = {
 							"id": user["id"],
 							"visited": user["visited"],
-							"total": (parseInt(user["total"]) + 1).toString(),
-							"score": (parseInt(user["score"]) + 1).toString()				
+							"total": (parseFloat(user["total"]) + 1).toString(),
+							"score": (parseFloat(user["score"]) + 1).toString()				
 					}
 				} else{
 					var updated_user = {
 							"id": user["id"],
 							"visited": user["visited"],
-							"total": (parseInt(user["total"]) + 1).toString(),
+							"total": (parseFloat(user["total"]) + 1).toString(),
 							"score": user["score"]				
 					}
 				}
@@ -87,7 +91,116 @@ $(document).ready(function(){
 			clicks = clicks + 1
 		});
 	} else{
-		
+		$( "#next" ).click(function(){
+			if(clicks%2 == 0){
+				user["visited"].push(question_value)
+				
+				for (i=1; i<6; i++){
+					$('#question-image' + i).draggable('disable')
+				}
+				
+				for (i=0; i<answerResults.length; i++){
+					divId = i+1
+					if (answerResults[i] === true){
+						$('#' + divId).addClass('correct')
+					} else{
+						$('#' + divId).addClass('incorrect')
+					}	
+				}
+				
+				$('#next').text("Continue")
+			}else{
+				let curScore = 0.0
+				for (i=0; i<answerResults.length; i++){
+					if (answerResults[i] === true){
+						curScore = curScore + 0.2
+					}
+				}
+				
+				user["visited"].push(question_value)
+				
+				var updated_user = {
+						"id": user["id"],
+						"visited": user["visited"],
+						"total": (parseFloat(user["total"]) + 1).toString(),
+						"score": (parseFloat(user["score"]) + curScore).toString()				
+				}
+				
+				if (updated_user["total"] === "10"){
+					$.ajax({
+						type: "POST",
+						url: "answer_question",                
+						dataType : "json",
+						contentType: "application/json; charset=utf-8",
+						data : JSON.stringify(updated_user),
+						success: function(result){
+							window.location.replace("/results")
+						},
+						error: function(request, status, error){
+							console.log("Error")
+							console.log(request)
+							console.log(status)
+							console.log(error)
+						}
+					});
+				} else{
+					$.ajax({
+						type: "POST",
+						url: "answer_question",                
+						dataType : "json",
+						contentType: "application/json; charset=utf-8",
+						data : JSON.stringify(updated_user),
+						success: function(result){
+							window.location.reload();
+						},
+						error: function(request, status, error){
+							console.log("Error")
+							console.log(request)
+							console.log(status)
+							console.log(error)
+						}
+					});
+				}
+			}
+			clicks = clicks + 1
+			
+			
+			if (updated_user["total"] === "10"){
+				$.ajax({
+					type: "POST",
+					url: "answer_question",                
+					dataType : "json",
+					contentType: "application/json; charset=utf-8",
+					data : JSON.stringify(updated_user),
+					success: function(result){
+						window.location.replace("/results")
+					},
+					error: function(request, status, error){
+						console.log("Error")
+						console.log(request)
+						console.log(status)
+						console.log(error)
+					}
+				});
+			} else{
+				$.ajax({
+					type: "POST",
+					url: "answer_question",                
+					dataType : "json",
+					contentType: "application/json; charset=utf-8",
+					data : JSON.stringify(updated_user),
+					success: function(result){
+						window.location.reload();
+					},
+					error: function(request, status, error){
+						console.log("Error")
+						console.log(request)
+						console.log(status)
+						console.log(error)
+					}
+				});
+			}
+		});
 	}
 });
 
@@ -175,6 +288,8 @@ function createChoiceQuestion(desserts, question){
 }
 
 function createDragQuestion(desserts, question){
+	answerResults = [false, false, false, false, false]
+	
 	let setEntry = document.createElement('div')
 	setEntry.classList.add('col-12')
 	setEntry.setAttribute("id", "question")
@@ -218,13 +333,7 @@ function createDragQuestion(desserts, question){
 	$(setTitle).text("Match the following images to the correct name.")
 	$(setQuestion).text(question["question"])
 	
-	
-	//let setQuestionMap = document.createElement('img')
-	//setQuestionMap.classList.add('img-fluid')
-	//setQuestionMap.src = desserts[question["id"]]["map"]
-	
 	$("#title").append(parseInt(user["total"])+1)
-	//$("#map").append(setQuestionMap)
 	
 	setEntry.appendChild(setTitle)
 	setEntry.appendChild(setQuestion)
@@ -255,18 +364,42 @@ function createDragQuestion(desserts, question){
 			"ui-draggable-dragging": "highlight"
 			},
 			revert: "invalid",
-			stack: ".draggable"
+			stack: ".draggable",
+			start: function(event, ui){
+			}
 		});
 	}
 	for(i = 1; i < 6; i++){
 		$('#' + i).droppable({
 			tolerance: 'pointer',
-			accept: '.question-img',
+			accept: function(draggable){
+				if(!$(this).hasClass('drop')){
+					return true
+				} else{
+					return false
+				}
+			},
 			activeClass: "darker",
 			hoverClass: "darkest",
 			drop: function(event, ui){
-				let droppableID = $(this).attr("id")
+				if(ui.draggable.attr('dropped')){
+					prev = ui.draggable.attr('dropped')
+					$('#' + prev).removeClass('drop')
+				}
+				$(this).addClass('drop')
+				$(this).find('img').append(ui.draggable)
+
+				if ($(ui.draggable).attr('id').match(/(\d+)/)[0] === $(this).attr('id')){
+					answerResults[$(this).attr('id')-1] = true
+				} else{
+					answerResults[$(this).attr('id')-1] = false
+				}
+				
+				console.log(answerResults)
+				ui.draggable.attr('dropped', $(this).attr('id'))
 			}
 		});
 	}
+	
+	$('#next').text("Submit")
 }

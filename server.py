@@ -251,7 +251,7 @@ userLearn = {
         "id": 0,
         "visited": [],
         "total": "0",
-        "score": "0",
+        "score": "0.0",
         "northAmerica": ["0","0"],
         "asia": ["0","0"],
         "europe": ["0","0"]
@@ -374,7 +374,7 @@ def results():
         "id": 0,
         "visited": [],
         "total": "0",
-        "score": "0",
+        "score": "0.0",
     }
         
     return render_template('results.html', desserts = desserts, user = user)
@@ -385,7 +385,7 @@ def find_question():
     
     if int(userLearn["quiz"]["total"]) < 2:
         print("here")
-        question_value = int(userLearn["quiz"]["total"]) + 11
+        question_value = int(userLearn["quiz"]["total"])%5 + 11
         
     if int(userLearn["quiz"]["total"]) >= 2 and int(userLearn["quiz"]["total"]) < 5:
         question_value = randint(1, 4)
