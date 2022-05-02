@@ -109,7 +109,7 @@ questions = {
         "question":"Drag the item to the appropriate description.",
         "options":["protein bars","layered cookie bars","savory bars","chocolate layered bars"],
         "answer":"layered cookie bars",
-        "format":"drag"
+        "format":"choice"
     },
     "4":{
         "id":"4",
@@ -123,7 +123,7 @@ questions = {
         "question":"Drag the item to the appropriate description.",
         "options":["taro pudding","purple yam jam", "purple rice cake", "acai"],
         "answer":"purple yam jam",
-        "format":"drag"
+        "format":"choice"
     },
     "6":{
         "id":"6",
@@ -159,6 +159,18 @@ questions = {
         "options":["Germany", "United States","Mexico","France"],
         "answer":"France",
         "format":"choice"
+    },
+    "11":{
+        "id":"11",
+        "question":"Match the dessert image to the name.",
+        "options":["1","3","5","7","9"],
+        "format":"drag"
+    },
+    "12":{
+        "id":"12",
+        "question":"Match the dessert image to the name.",
+        "options":["2","4","6","8","10"],
+        "format":"drag"
     }
 }
 
@@ -240,6 +252,9 @@ userLearn = {
         "visited": [],
         "total": "0",
         "score": "0",
+        "northAmerica": ["0","0"],
+        "asia": ["0","0"],
+        "europe": ["0","0"]
     }
 }
 
@@ -368,10 +383,24 @@ def find_question():
     global questions
     global userLearn
     
-    question_value = randint(1, 10)
-    print(userLearn["quiz"]["visited"])
-    while question_value in userLearn["quiz"]["visited"]:
-        question_value = randint(1, 10)
+    if int(userLearn["quiz"]["total"]) < 2:
+        print("here")
+        question_value = int(userLearn["quiz"]["total"]) + 11
+        
+    if int(userLearn["quiz"]["total"]) >= 2 and int(userLearn["quiz"]["total"]) < 5:
+        question_value = randint(1, 4)
+        while question_value in userLearn["quiz"]["visited"]:
+            question_value = randint(1, 4)
+    
+    if int(userLearn["quiz"]["total"]) >= 5 and int(userLearn["quiz"]["total"]) < 8:
+        question_value = randint(5, 8)
+        while question_value in userLearn["quiz"]["visited"]:
+            question_value = randint(5, 8)
+    
+    if int(userLearn["quiz"]["total"]) >= 8:
+        question_value = randint(9, 10)
+        while question_value in userLearn["quiz"]["visited"]:
+            question_value = randint(9, 10)
     
     return question_value
 

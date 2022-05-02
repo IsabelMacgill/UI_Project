@@ -86,6 +86,8 @@ $(document).ready(function(){
 			}
 			clicks = clicks + 1
 		});
+	} else{
+		
 	}
 });
 
@@ -180,128 +182,91 @@ function createDragQuestion(desserts, question){
 	setTitle.classList.add('row')
 	let setQuestion = document.createElement('div')
 	setQuestion.classList.add('row')
-	let setImageDiv = document.createElement('div')
-	setImageDiv.classList.add('row')
-	setImageDiv.setAttribute("id", "question-image")
-	let setQuestionImage = document.createElement('img')
-	setQuestionImage.classList.add('img-fluid')
-	setQuestionImage.src = desserts[question["id"]]["image"]
-	
+	let setImageRow = document.createElement('div')
+	setImageRow.classList.add('row')
+	setImageRow.setAttribute("id", "image-row")
 	let setAnswerEntry = document.createElement('div')
 	setAnswerEntry.classList.add('row')
 	setAnswerEntry.setAttribute("id", "answers")
 	let firstAnswer = document.createElement('div')
 	firstAnswer.classList.add('drop-answer')
-	firstAnswer.classList.add('col-3')
+	firstAnswer.classList.add('col-2')
 	firstAnswer.setAttribute("id", "1")
 	let secondAnswer = document.createElement('div')
 	secondAnswer.classList.add('drop-answer')
-	secondAnswer.classList.add('col-3')
+	secondAnswer.classList.add('col-2')
 	secondAnswer.setAttribute("id", "2")
 	let thirdAnswer = document.createElement('div')
 	thirdAnswer.classList.add('drop-answer')
-	thirdAnswer.classList.add('col-3')
+	thirdAnswer.classList.add('col-2')
 	thirdAnswer.setAttribute("id", "3")
 	let fourthAnswer = document.createElement('div')
 	fourthAnswer.classList.add('drop-answer')
-	fourthAnswer.classList.add('col-3')
+	fourthAnswer.classList.add('col-2')
 	fourthAnswer.setAttribute("id", "4")
+	let fifthAnswer = document.createElement('div')
+	fifthAnswer.classList.add('drop-answer')
+	fifthAnswer.classList.add('col-2')
+	fifthAnswer.setAttribute("id", "5")
 	
-	$(firstAnswer).text(question["options"][0])
-	$(secondAnswer).text(question["options"][1])
-	$(thirdAnswer).text(question["options"][2])
-	$(fourthAnswer).text(question["options"][3])
+	$(firstAnswer).text(desserts[question["options"][0]]["name"])
+	$(secondAnswer).text(desserts[question["options"][1]]["name"])
+	$(thirdAnswer).text(desserts[question["options"][2]]["name"])
+	$(fourthAnswer).text(desserts[question["options"][3]]["name"])
+	$(fifthAnswer).text(desserts[question["options"][4]]["name"])
 	
-	$(setTitle).text(desserts[question["id"]]["name"])
+	$(setTitle).text("Match the following images to the correct name.")
 	$(setQuestion).text(question["question"])
 	
 	
-	let setQuestionMap = document.createElement('img')
-	setQuestionMap.classList.add('img-fluid')
-	setQuestionMap.src = desserts[question["id"]]["map"]
+	//let setQuestionMap = document.createElement('img')
+	//setQuestionMap.classList.add('img-fluid')
+	//setQuestionMap.src = desserts[question["id"]]["map"]
 	
 	$("#title").append(parseInt(user["total"])+1)
-	$("#map").append(setQuestionMap)
+	//$("#map").append(setQuestionMap)
 	
 	setEntry.appendChild(setTitle)
 	setEntry.appendChild(setQuestion)
-	setImageDiv.appendChild(setQuestionImage)
-	setEntry.appendChild(setImageDiv)
+	for(let i = 1; i < 6; i++){
+		let setImageDiv = document.createElement('div')
+		setImageDiv.classList.add('col-2')
+		setImageDiv.classList.add('question-img')
+		setImageDiv.setAttribute("id", "question-image"+i)
+		let setQuestionImage = document.createElement('img')
+		setQuestionImage.classList.add('img-fluid')
+		setQuestionImage.src = desserts[question["options"][i-1]]["image"]
+		setImageDiv.appendChild(setQuestionImage)
+		setImageRow.appendChild(setImageDiv)
+	}
+	setEntry.appendChild(setImageRow)
 	$("#prompt").append(setEntry)
 	
 	setAnswerEntry.appendChild(firstAnswer)
 	setAnswerEntry.appendChild(secondAnswer)
 	setAnswerEntry.appendChild(thirdAnswer)
 	setAnswerEntry.appendChild(fourthAnswer)
+	setAnswerEntry.appendChild(fifthAnswer)
 	$("#prompt").append(setAnswerEntry)
 	
-	$('#question-image').draggable({
-		classes:{
+	for(i = 1; i < 6; i++){
+		$('#question-image' + i).draggable({
+			classes:{
 			"ui-draggable-dragging": "highlight"
-		},
-		revert: "invalid",
-		stack: ".draggable"
-	});
-	for(let i = 1; i < 5; i++){
+			},
+			revert: "invalid",
+			stack: ".draggable"
+		});
+	}
+	for(i = 1; i < 6; i++){
 		$('#' + i).droppable({
 			tolerance: 'pointer',
-			accept: '#question-image',
+			accept: '.question-img',
 			activeClass: "darker",
 			hoverClass: "darkest",
 			drop: function(event, ui){
 				let droppableID = $(this).attr("id")
-				user["visited"].push(question_value)
-				if (question["options"][parseInt(droppableID)-1] === question["answer"]){
-					var updated_user = {
-							"id": user["id"],
-							"visited": user["visited"],
-							"total": (parseInt(user["total"]) + 1).toString(),
-							"score": (parseInt(user["score"]) + 1).toString()				
-					}
-				} else{
-					var updated_user = {
-							"id": user["id"],
-							"visited": user["visited"],
-							"total": (parseInt(user["total"]) + 1).toString(),
-							"score": user["score"]				
-					}
-				}
-				if (updated_user["total"] === "10"){
-					$.ajax({
-						type: "POST",
-						url: "answer_question",                
-						dataType : "json",
-						contentType: "application/json; charset=utf-8",
-						data : JSON.stringify(updated_user),
-						success: function(result){
-							window.location.replace("/results")
-						},
-						error: function(request, status, error){
-							console.log("Error")
-							console.log(request)
-							console.log(status)
-							console.log(error)
-						}
-					});
-				} else{
-					$.ajax({
-						type: "POST",
-						url: "answer_question",                
-						dataType : "json",
-						contentType: "application/json; charset=utf-8",
-						data : JSON.stringify(updated_user),
-						success: function(result){
-							window.location.reload();
-						},
-						error: function(request, status, error){
-							console.log("Error")
-							console.log(request)
-							console.log(status)
-							console.log(error)
-						}
-					});
-				}
-			} 
+			}
 		});
 	}
 }
