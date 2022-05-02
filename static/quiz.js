@@ -215,13 +215,17 @@ function createChoiceQuestion(desserts, question){
 	setQuestion.classList.add('row')
 	setQuestion.classList.add('question')
 	let setQuestionImage = document.createElement('img')
-	setQuestionImage.classList.add('img-fluid')
+	setQuestionImage.classList.add('choice-img')
 	setQuestionImage.src = desserts[question["id"]]["image"]
 	
 	let setAnswerEntry = document.createElement('div')
 	setAnswerEntry.classList.add('row')
 	setAnswerEntry.setAttribute("id", "answers")
 	let answerForm = document.createElement("form")
+
+	let divGroup1 = document.createElement("div")
+	divGroup1.setAttribute("class", "group");
+
 	let firstAnswer = document.createElement("input")
 	firstAnswer.type = "radio"
 	firstAnswer.setAttribute("id", "option-1")
@@ -229,6 +233,9 @@ function createChoiceQuestion(desserts, question){
 	firstAnswer.value = "1"
 	let firstAnswerLabel = document.createElement("label")
 	firstAnswerLabel.setAttribute("for", "1")
+
+	let divGroup2 = document.createElement("div")
+	divGroup2.setAttribute("class", "group");
 	let secondAnswer = document.createElement("input")
 	secondAnswer.type = "radio"
 	secondAnswer.setAttribute("id", "option-2")
@@ -236,6 +243,9 @@ function createChoiceQuestion(desserts, question){
 	secondAnswer.value = "2"
 	let secondAnswerLabel = document.createElement("label")
 	secondAnswerLabel.setAttribute("for", "2")
+
+	let divGroup3 = document.createElement("div")
+	divGroup3.setAttribute("class", "group");
 	let thirdAnswer = document.createElement("input")
 	thirdAnswer.type = "radio"
 	thirdAnswer.setAttribute("id", "option-3")
@@ -243,6 +253,9 @@ function createChoiceQuestion(desserts, question){
 	thirdAnswer.value = "3"
 	let thirdAnswerLabel = document.createElement("label")
 	thirdAnswerLabel.setAttribute("for", "3")
+
+	let divGroup4 = document.createElement("div")
+	divGroup4.setAttribute("class", "group");
 	let fourthAnswer = document.createElement("input")
 	fourthAnswer.type = "radio"
 	fourthAnswer.setAttribute("id", "option-4")
@@ -250,7 +263,8 @@ function createChoiceQuestion(desserts, question){
 	fourthAnswer.value = "4"
 	let fourthAnswerLabel = document.createElement("label")
 	fourthAnswerLabel.setAttribute("for", "4")
-	
+
+	setAnswerEntry.appendChild(answerForm)
 	let setQuestionMap = document.createElement('img')
 	setQuestionMap.classList.add('img-fluid')
 	setQuestionMap.src = desserts[question["id"]]["map"]
@@ -262,15 +276,32 @@ function createChoiceQuestion(desserts, question){
 	setEntry.appendChild(setQuestionEntry)
 	$("#prompt").append(setEntry)
 	
-	answerForm.appendChild(firstAnswer)
-	answerForm.appendChild(firstAnswerLabel)
-	answerForm.appendChild(secondAnswer)
-	answerForm.appendChild(secondAnswerLabel)
-	answerForm.appendChild(thirdAnswer)
-	answerForm.appendChild(thirdAnswerLabel)
-	answerForm.appendChild(fourthAnswer)
-	answerForm.appendChild(fourthAnswerLabel)
-	setAnswerEntry.appendChild(answerForm)
+	
+	divGroup1.appendChild(firstAnswer);
+	divGroup1.appendChild(firstAnswerLabel)
+	answerForm.appendChild(divGroup1);
+
+	divGroup2.appendChild(secondAnswer);
+	divGroup2.appendChild(secondAnswerLabel)
+	answerForm.appendChild(divGroup2);
+
+	divGroup3.appendChild(thirdAnswer);
+	divGroup3.appendChild(thirdAnswerLabel)
+	answerForm.appendChild(divGroup3);
+
+	divGroup4.appendChild(fourthAnswer);
+	divGroup4.appendChild(fourthAnswerLabel)
+	answerForm.appendChild(divGroup4);
+
+	// answerForm.appendChild(firstAnswer)
+	// answerForm.appendChild(firstAnswerLabel)
+	// answerForm.appendChild(secondAnswer)
+	// answerForm.appendChild(secondAnswerLabel)
+	// answerForm.appendChild(thirdAnswer)
+	// answerForm.appendChild(thirdAnswerLabel)
+	// answerForm.appendChild(fourthAnswer)
+	// answerForm.appendChild(fourthAnswerLabel)
+	// setAnswerEntry.appendChild(answerForm)
 	$("#prompt").append(setAnswerEntry)
 	
 	$("#title").append(parseInt(user["total"])+1)
@@ -297,28 +328,35 @@ function createDragQuestion(desserts, question){
 	setTitle.classList.add('row')
 	let setQuestion = document.createElement('div')
 	setQuestion.classList.add('row')
+
 	let setImageRow = document.createElement('div')
 	setImageRow.classList.add('row')
 	setImageRow.setAttribute("id", "image-row")
+
 	let setAnswerEntry = document.createElement('div')
 	setAnswerEntry.classList.add('row')
 	setAnswerEntry.setAttribute("id", "answers")
+
 	let firstAnswer = document.createElement('div')
 	firstAnswer.classList.add('drop-answer')
 	firstAnswer.classList.add('col-2')
 	firstAnswer.setAttribute("id", "1")
+
 	let secondAnswer = document.createElement('div')
 	secondAnswer.classList.add('drop-answer')
 	secondAnswer.classList.add('col-2')
 	secondAnswer.setAttribute("id", "2")
+
 	let thirdAnswer = document.createElement('div')
 	thirdAnswer.classList.add('drop-answer')
 	thirdAnswer.classList.add('col-2')
 	thirdAnswer.setAttribute("id", "3")
+
 	let fourthAnswer = document.createElement('div')
 	fourthAnswer.classList.add('drop-answer')
 	fourthAnswer.classList.add('col-2')
 	fourthAnswer.setAttribute("id", "4")
+
 	let fifthAnswer = document.createElement('div')
 	fifthAnswer.classList.add('drop-answer')
 	fifthAnswer.classList.add('col-2')
@@ -330,7 +368,6 @@ function createDragQuestion(desserts, question){
 	$(fourthAnswer).text(desserts[question["options"][3]]["name"])
 	$(fifthAnswer).text(desserts[question["options"][4]]["name"])
 	
-	$(setTitle).text("Match the following images to the correct name.")
 	$(setQuestion).text(question["question"])
 	
 	$("#title").append(parseInt(user["total"])+1)
@@ -343,7 +380,7 @@ function createDragQuestion(desserts, question){
 		setImageDiv.classList.add('question-img')
 		setImageDiv.setAttribute("id", "question-image"+i)
 		let setQuestionImage = document.createElement('img')
-		setQuestionImage.classList.add('img-fluid')
+		// setQuestionImage.classList.add('img-fluid')
 		setQuestionImage.src = desserts[question["options"][i-1]]["image"]
 		setImageDiv.appendChild(setQuestionImage)
 		setImageRow.appendChild(setImageDiv)

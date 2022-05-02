@@ -106,7 +106,7 @@ questions = {
     },
     "3":{
         "id":"3",
-        "question":"Drag the item to the appropriate description.",
+        "question":"Choose the appropriate description for the dessert.",
         "options":["protein bars","layered cookie bars","savory bars","chocolate layered bars"],
         "answer":"layered cookie bars",
         "format":"choice"
@@ -120,7 +120,7 @@ questions = {
     },
     "5":{
         "id":"5",
-        "question":"Drag the item to the appropriate description.",
+        "question":"Choose the appropriate description for the dessert.",
         "options":["taro pudding","purple yam jam", "purple rice cake", "acai"],
         "answer":"purple yam jam",
         "format":"choice"
