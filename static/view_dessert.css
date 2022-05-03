@@ -41,6 +41,10 @@
     position:relative;
     left: 10%;
 }
+#flashcard{
+    font-family: 'Indie Flower', cursive;
+    font-size: 24px;
+}
 
 #map{
     width: 245px;

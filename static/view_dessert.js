@@ -70,6 +70,10 @@ $(document).ready(function(){
 	display(data)
     enterTime(id);
 
+    setTimeout(function() {
+        $("#flashcard").fadeOut().empty();
+    }, 5000);
+
     $("#next").click(function (event){
         event.preventDefault();
         leaveTime(id);
