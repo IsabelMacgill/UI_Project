@@ -34,6 +34,7 @@ $(document).ready(function(){
 					$('label[for='+ correct +']').addClass('correct')
 				}
 				$('#next').text("Continue")
+				$('input[name=answers]').attr("disabled",true);
 				
 			} else{
 				user["visited"].push(question_value)
