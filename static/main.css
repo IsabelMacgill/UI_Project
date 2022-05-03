@@ -1,9 +1,18 @@
+#home{
+	height: 125px;
+	margin-left: 75px;
+
+}
 #id-selector{
 	
 }
 
 .class-selector{
 	
+}
+
+#question{
+	font-size: 20;
 }
 
 .btn{
