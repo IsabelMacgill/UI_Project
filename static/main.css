@@ -68,3 +68,7 @@
 .incorrect{
 	color: red;
 }
+
+.ui-draggable{
+	z-index:999999;
+}
