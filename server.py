@@ -384,7 +384,6 @@ def find_question():
     global userLearn
     
     if int(userLearn["quiz"]["total"]) < 2:
-        print("here")
         question_value = int(userLearn["quiz"]["total"])%5 + 11
         
     if int(userLearn["quiz"]["total"]) >= 2 and int(userLearn["quiz"]["total"]) < 5:

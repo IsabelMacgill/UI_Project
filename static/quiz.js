@@ -375,14 +375,22 @@ function createDragQuestion(desserts, question){
 	
 	setEntry.appendChild(setTitle)
 	setEntry.appendChild(setQuestion)
+	
+	let visitedVariables = []
+	
 	for(let i = 1; i < 6; i++){
+		let j = parseInt(Math.random() * (6 - 1) + 1)
+		while (visitedVariables.includes(j)){
+			j = parseInt(Math.random() * (6 - 1) + 1)
+		}
+		visitedVariables.push(j)
 		let setImageDiv = document.createElement('div')
 		setImageDiv.classList.add('col-2')
 		setImageDiv.classList.add('question-img')
-		setImageDiv.setAttribute("id", "question-image"+i)
+		setImageDiv.setAttribute("id", "question-image"+j)
 		let setQuestionImage = document.createElement('img')
 		// setQuestionImage.classList.add('img-fluid')
-		setQuestionImage.src = desserts[question["options"][i-1]]["image"]
+		setQuestionImage.src = desserts[question["options"][j-1]]["image"]
 		setImageDiv.appendChild(setQuestionImage)
 		setImageRow.appendChild(setImageDiv)
 	}
