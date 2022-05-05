@@ -353,12 +353,18 @@ def answer_question():
     visited = json_data["visited"]
     total = json_data["total"]
     score = json_data["score"]
+    northAmerica = json_data["northAmerica"]
+    asia = json_data["asia"]
+    europe = json_data["europe"]
     
     userLearn["quiz"] = {
     "id": userId,
     "visited": visited,
     "total": total,
-    "score": score
+    "score": score,
+    "northAmerica": northAmerica,
+    "asia": asia,
+    "europe": europe
     }
         
     return jsonify(id = userId)
@@ -375,6 +381,9 @@ def results():
         "visited": [],
         "total": "0",
         "score": "0.0",
+        "northAmerica": ["0","0"],
+        "asia": ["0","0"],
+        "europe": ["0","0"]
     }
         
     return render_template('results.html', desserts = desserts, user = user)

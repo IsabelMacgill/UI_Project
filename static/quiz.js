@@ -1,4 +1,5 @@
 var answerResults;
+console.log(user)
 
 $(function(){
 	if (question["format"] === "choice"){
@@ -49,18 +50,41 @@ $(document).ready(function(){
 				user["visited"].push(question_value)
 				
 				if ($('input[name="answers"]:checked').val() === question["answer"]){
+					if (parseInt(user["total"])<5){
+						user["northAmerica"][0] = parseInt(user["northAmerica"][0]) + 1
+						user["northAmerica"][1] = parseInt(user["northAmerica"][1]) + 1
+					} else if (parseInt(user["total"])<8){
+						user["asia"][0] = parseInt(user["asia"][0]) + 1
+						user["asia"][1] = parseInt(user["asia"][1]) + 1
+					} else{
+						user["europe"][0] = parseInt(user["europe"][0]) + 1
+						user["europe"][1] = parseInt(user["europe"][1]) + 1
+					}
 					var updated_user = {
 							"id": user["id"],
 							"visited": user["visited"],
 							"total": (parseFloat(user["total"]) + 1).toString(),
-							"score": (parseFloat(user["score"]) + 1).toString()				
+							"score": (parseFloat(user["score"]) + 1).toString(),
+							"northAmerica": user["northAmerica"],
+							"asia": user["asia"],
+							"europe": user["europe"]
 					}
 				} else{
+					if (parseInt(user["total"])<5){
+						user["northAmerica"][1] = parseInt(user["northAmerica"][1]) + 1
+					} else if (parseInt(user["total"])<8){
+						user["asia"][1] = parseInt(user["asia"][1]) + 1
+					} else{
+						user["europe"][1] = parseInt(user["europe"][1]) + 1
+					}
 					var updated_user = {
 							"id": user["id"],
 							"visited": user["visited"],
 							"total": (parseFloat(user["total"]) + 1).toString(),
-							"score": user["score"]				
+							"score": user["score"],
+							"northAmerica": user["northAmerica"],
+							"asia": user["asia"],
+							"europe": user["europe"]
 					}
 				}
 				
@@ -137,7 +161,10 @@ $(document).ready(function(){
 						"id": user["id"],
 						"visited": user["visited"],
 						"total": (parseFloat(user["total"]) + 1).toString(),
-						"score": (parseFloat(user["score"]) + curScore).toString()				
+						"score": (parseFloat(user["score"]) + curScore).toString(),
+						"northAmerica": user["northAmerica"],
+						"asia": user["asia"],
+						"europe": user["europe"]
 				}
 				
 				if (updated_user["total"] === "10"){

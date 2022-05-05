@@ -31,6 +31,17 @@
 	color: #6D6D6D;
 }
 
+.padding{
+	padding-top: 10px;
+}
+
+.go-back{
+	background-color: #b5cfa3;
+	border-radius: 5px;
+	border: solid #6D6D6D 1px;
+	color: #6D6D6D;
+}
+
 .center{
 	text-align: center;
 }
