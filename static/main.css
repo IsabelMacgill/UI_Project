@@ -4,19 +4,27 @@
 
 }
 #id-selector{
-	
 }
 
 #image-row{
 	height: 150px;
 }
 
-.class-selector{
-	
-}
-
 #question{
 	font-size: 20;
+}
+
+#description{
+	color: #6D6D6D;
+}
+
+#learn-button{
+	background-color: #b5cfa3;
+	border: #bdd6ac;
+	color: black;
+}
+
+.class-selector{
 }
 
 .btn{
@@ -41,18 +49,8 @@
 	padding-bottom: 10px;
 }
 
-#description{
-	color: #6D6D6D;
-}
-
 .navbar{
 	background-color: #e1edd8;
-}
-
-#learn-button{
-	background-color: #b5cfa3;
-	border: #bdd6ac;
-	color: black;
 }
 
 .navbar-brand{
