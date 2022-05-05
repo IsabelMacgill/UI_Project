@@ -20,22 +20,30 @@ $(document).ready(function(){
 	if (question["format"] === "choice"){
 		$( "#next" ).click(function(){
 			if(clicks%2 == 0){
-				let selected = $('input[name="answers"]:checked').attr("id").match(/(\d+)/)[0]
-				if ($('input[name="answers"]:checked').val() === question["answer"]){
-					$('label[for='+ selected +']').addClass('correct')
+				if ($('input[name="answers"]:checked').length > 0){
+					let selected = $('input[name="answers"]:checked').attr("id").match(/(\d+)/)[0]
+					if ($('input[name="answers"]:checked').val() === question["answer"]){
+						$('label[for='+ selected +']').addClass('correct')
+					} else{
+						for (i=0; i<question["options"].length; i++){
+							if(question["options"][i] === question["answer"]){
+								correct = i + 1
+							}
+						}
+						console.log(correct)
+						$('label[for='+ selected +']').addClass('incorrect')
+						$('label[for='+ correct +']').addClass('correct')
+					}
+					$('#next').text("Continue")
+					$('input[name=answers]').attr("disabled",true);	
 				} else{
 					for (i=0; i<question["options"].length; i++){
 						if(question["options"][i] === question["answer"]){
 							correct = i + 1
 						}
 					}
-					console.log(correct)
-					$('label[for='+ selected +']').addClass('incorrect')
 					$('label[for='+ correct +']').addClass('correct')
 				}
-				$('#next').text("Continue")
-				$('input[name=answers]').attr("disabled",true);
-				
 			} else{
 				user["visited"].push(question_value)
 				if ($('input[name="answers"]:checked').val() === question["answer"]){
@@ -88,6 +96,7 @@ $(document).ready(function(){
 						}
 					});
 				}
+				
 			}
 			clicks = clicks + 1
 		});
@@ -164,43 +173,6 @@ $(document).ready(function(){
 				}
 			}
 			clicks = clicks + 1
-			
-			
-			if (updated_user["total"] === "10"){
-				$.ajax({
-					type: "POST",
-					url: "answer_question",                
-					dataType : "json",
-					contentType: "application/json; charset=utf-8",
-					data : JSON.stringify(updated_user),
-					success: function(result){
-						window.location.replace("/results")
-					},
-					error: function(request, status, error){
-						console.log("Error")
-						console.log(request)
-						console.log(status)
-						console.log(error)
-					}
-				});
-			} else{
-				$.ajax({
-					type: "POST",
-					url: "answer_question",                
-					dataType : "json",
-					contentType: "application/json; charset=utf-8",
-					data : JSON.stringify(updated_user),
-					success: function(result){
-						window.location.reload();
-					},
-					error: function(request, status, error){
-						console.log("Error")
-						console.log(request)
-						console.log(status)
-						console.log(error)
-					}
-				});
-			}
 		});
 	}
 });
@@ -428,6 +400,10 @@ function createDragQuestion(desserts, question){
 			activeClass: "darker",
 			hoverClass: "darkest",
 			drop: function(event, ui){
+				$(ui.draggable).css('position', 'absolute');
+				$(ui.draggable).css('top', $(this).position().top + 40);
+				$(ui.draggable).css('left', $(this).position().left);
+				console.log($(this).position().left)
 				if(ui.draggable.attr('dropped')){
 					prev = ui.draggable.attr('dropped')
 					$('#' + prev).removeClass('drop')
